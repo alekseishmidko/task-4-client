@@ -21,12 +21,12 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="max-w-2xl mx-auto p-14  ">
       <Form
-        {...layout}
+        layout="vertical"
         name="nest-messages"
         onFinish={onFinish}
-        style={{ maxWidth: 600 }}
+        className="bg-white rounded px-8 pt-6 pb-8 mb-5"
         validateMessages={validateMessages}
       >
         <Form.Item
@@ -34,29 +34,40 @@ const Login = () => {
           label="Email"
           rules={[{ type: "email", required: true }]}
         >
-          <Input />
+          <Input
+            className="w-full p-2 border rounded"
+            placeholder="Enter your email"
+          />
         </Form.Item>
         <Form.Item
           name={["password"]}
           label="Password"
           rules={[{ type: "string", required: true }]}
         >
-          <Input />
+          <Input
+            className="w-full p-2 border rounded"
+            type="password"
+            placeholder="Enter your password"
+          />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-          <h4>
-            Havent Acc?
-            <Link to={"/register"}>
-              <span>Create account</span>
+        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 4 }}>
+          <h4 className="mb-2">
+            Haven't Acc?
+            <Link to={"/register"} className="ml-1 text-blue-500">
+              Create account
             </Link>
           </h4>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="w-full rounded bg-blue-500 hover:bg-blue-600 mt-4"
+          >
             Submit
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 };
 

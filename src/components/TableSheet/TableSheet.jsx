@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Table } from "antd";
+import { Button, Table, Space } from "antd";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { columns, onChangeColumns } from "./columns";
 import { useDispatch } from "react-redux";
@@ -79,10 +79,31 @@ const TableSheet = () => {
 
   return (
     <>
-      <div style={{ marginBottom: 16 }}>
-        <LockOutlined onClick={onClickBlock} />
-        <UnlockOutlined onClick={onClickUnBlock} />
-        <DeleteOutlined onClick={onClickRemove} />
+      <div className="my-5 ">
+        <LockOutlined
+          className={`mx-16 mr-8 text-xl  ${
+            !hasSelected
+              ? "text-gray-400 cursor-not-allowed "
+              : "text-yellow-500 hover:text-yellow-700"
+          }`}
+          onClick={hasSelected && onClickBlock}
+        />
+        <UnlockOutlined
+          className={`mx-8 text-xl  ${
+            !hasSelected
+              ? "text-gray-400 cursor-not-allowed "
+              : "text-green-500 hover:text-green-700"
+          }`}
+          onClick={hasSelected && onClickUnBlock}
+        />
+        <DeleteOutlined
+          onClick={hasSelected && onClickRemove}
+          className={` mx-8 text-xl  ${
+            !hasSelected
+              ? "text-gray-400 cursor-not-allowed "
+              : "text-red-500 hover:text-red-700"
+          }`}
+        />
 
         <span style={{ marginLeft: 12 }}>
           {hasSelected ? `Selected ${selectedRow.length} items` : ""}
@@ -94,6 +115,7 @@ const TableSheet = () => {
         dataSource={allUsers}
         pagination={false}
         onChange={onChangeColumns}
+        className="mx-4"
       />
     </>
   );

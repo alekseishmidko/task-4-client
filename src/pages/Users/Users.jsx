@@ -4,7 +4,7 @@ import { Button, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/dataSlice/accountSlice";
-
+import { LogoutOutlined } from "@ant-design/icons";
 const Users = () => {
   const isLoading = useSelector((state) => state.accountSlice.isLoading);
   const dispatch = useDispatch();
@@ -17,7 +17,12 @@ const Users = () => {
   };
   return (
     <div>
-      <Button onClick={onClickLogout}>logout</Button>
+      <div className="flex justify-end mr-3">
+        <LogoutOutlined
+          onClick={onClickLogout}
+          className="mx-8 my-3 text-2xl"
+        />
+      </div>
       <TableSheet />
     </div>
   );

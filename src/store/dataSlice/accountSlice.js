@@ -144,7 +144,7 @@ const accountSlice = createSlice({
       state.data = [];
       state.userData = [];
       state.allUsers = [];
-      state.message = action.payload.message;
+      // state.message = action.payload.message;
     });
     // Registration POST
     builder.addCase(fetchRegistration.pending, (state) => {
@@ -167,7 +167,7 @@ const accountSlice = createSlice({
       state.data = [];
       state.userData = [];
       state.allUsers = [];
-      state.message = action.payload.message;
+      // state.message = action.payload.message;
     });
     // Block POST
     builder.addCase(fetchBlock.pending, (state) => {
