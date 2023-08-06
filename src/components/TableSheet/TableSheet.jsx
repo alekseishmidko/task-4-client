@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Table } from "antd";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { columns } from "./columns";
+import { columns, onChangeColumns } from "./columns";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -17,7 +17,7 @@ import {
 const TableSheet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data, isLoading, userData, allUsers } = useSelector(
+  const { isLoading, userData, allUsers } = useSelector(
     (state) => state.accountSlice
   );
 
@@ -51,7 +51,6 @@ const TableSheet = () => {
       setSelectedRow(selectedRows);
     },
   };
-
   const userIds = selectedRow.map((item) => {
     return item._id;
   });
@@ -65,7 +64,7 @@ const TableSheet = () => {
   const onClickRemove = () => {
     dispatch(fetchRemove(userIds));
   };
-
+  const hasSelected = selectedRow.length > 0;
   React.useEffect(() => {
     if (findInAllUsers === true) {
       navigate("/");
@@ -77,20 +76,24 @@ const TableSheet = () => {
       navigate("/");
     }
   }, [allUsers, isLoading]);
+
   return (
     <>
-      <Button onClick={onClickBlock}>Block</Button>
-      <UnlockOutlined onClick={onClickUnBlock} />
-      <DeleteOutlined onClick={onClickRemove} />
+      <div style={{ marginBottom: 16 }}>
+        <LockOutlined onClick={onClickBlock} />
+        <UnlockOutlined onClick={onClickUnBlock} />
+        <DeleteOutlined onClick={onClickRemove} />
 
-      {/* <Button onClick={onClickUnBlock}>unBlock</Button>
-      <Button onClick={onClickRemove}>Remove</Button> */}
-
+        <span style={{ marginLeft: 12 }}>
+          {hasSelected ? `Selected ${selectedRow.length} items` : ""}
+        </span>
+      </div>
       <Table
         columns={columns}
         rowSelection={{ ...rowSelection }}
         dataSource={allUsers}
         pagination={false}
+        onChange={onChangeColumns}
       />
     </>
   );

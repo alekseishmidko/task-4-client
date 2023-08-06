@@ -118,6 +118,7 @@ const accountSlice = createSlice({
     logout: (state) => {
       state.data = [];
       state.userData = [];
+      state.allUsers = [];
       state.errors = null;
     },
   },

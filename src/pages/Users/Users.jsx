@@ -2,22 +2,23 @@ import React from "react";
 import TableSheet from "../../components/TableSheet/TableSheet";
 import { Button, Table } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-//
-import { columns } from "../../components/TableSheet/columns";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/dataSlice/accountSlice";
 
 const Users = () => {
-  const { data } = useSelector((state) => state.accountSlice);
   const isLoading = useSelector((state) => state.accountSlice.isLoading);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   if (isLoading === "loading") return <h2>Loading...</h2>;
   //
-
+  const onClickLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
   return (
     <div>
-      <Button onClick={() => navigate("/")}>Exit</Button>
+      <Button onClick={onClickLogout}>logout</Button>
       <TableSheet />
-      {/*  */}
     </div>
   );
 };
