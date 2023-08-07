@@ -5,17 +5,14 @@ export const fetchLogin = createAsyncThunk(
   "account/fetchLogin",
   async ({ email, password }, thunkAPI) => {
     try {
-      // Выполнение запроса на сервер с использованием логина и пароля
       const response = await axios.post("auth/login", {
         email,
         password,
       });
 
-      // Возвращение полученных данных в виде результата выполнения thunk-экшена
       localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
-      // Обработка ошибок, если необходимо
       // throw error;
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -42,27 +39,11 @@ export const fetchRegistration = createAsyncThunk(
     }
   }
 );
-// export const postCurrent = createAsyncThunk(
-//   "account/postCurrent",
-//   async ({ formData }, thunkAPI) => {
-//     try {
-//       console.log(formData, "post");
-//       // Выполнение запроса на сервер с использованием переданного токена
-//       const response = await axios.post("account/current", formData);
-//       // console.log(response.data, "postcurrent ");
-//       return response.data;
-//     } catch (error) {
-//       // console.log(error.response.data.message);
-//       return thunkAPI.rejectWithValue(error.response.data.message);
-//       // throw error;
-//     }
-//   }
-// );
+
 export const fetchBlock = createAsyncThunk(
   "auth/block",
   async (userIds, thunkAPI) => {
     try {
-      // Выполнение запроса на сервер с использованием переданного токена
       const response = await axios.post("auth/block", userIds);
       console.log(response.data, "fetchBlock ");
       return response.data;
@@ -77,7 +58,6 @@ export const fetchUnBlock = createAsyncThunk(
   "auth/unblock",
   async (userIDs, thunkAPI) => {
     try {
-      // Выполнение запроса на сервер с использованием переданного токена
       const response = await axios.post("auth/unblock", userIDs);
       console.log(response.data, "fetchUnBlock ");
       return response.data;
@@ -92,7 +72,6 @@ export const fetchRemove = createAsyncThunk(
   "auth/remove",
   async (userIDs, thunkAPI) => {
     try {
-      // Выполнение запроса на сервер с использованием переданного токена
       const response = await axios.post("auth/remove", userIDs);
       console.log(response.data, "fetchRemove ");
       return response.data;
@@ -109,7 +88,6 @@ const initialState = {
   allUsers: [],
   isLoading: "loading",
   errors: null,
-  message: "",
 };
 const accountSlice = createSlice({
   name: "accountSlice",
@@ -144,7 +122,6 @@ const accountSlice = createSlice({
       state.data = [];
       state.userData = [];
       state.allUsers = [];
-      // state.message = action.payload.message;
     });
     // Registration POST
     builder.addCase(fetchRegistration.pending, (state) => {
@@ -167,13 +144,11 @@ const accountSlice = createSlice({
       state.data = [];
       state.userData = [];
       state.allUsers = [];
-      // state.message = action.payload.message;
     });
     // Block POST
     builder.addCase(fetchBlock.pending, (state) => {
       state.isLoading = "loading";
       state.errors = null;
-      // state.data = null;
     });
     builder.addCase(fetchBlock.fulfilled, (state, action) => {
       state.isLoading = "loaded";
@@ -186,7 +161,6 @@ const accountSlice = createSlice({
       state.isLoading = "error";
       state.errors = action.error.message;
       // state.data = null;
-      // state.message = action.payload.message;
     });
     // UnBlock POST
     builder.addCase(fetchUnBlock.pending, (state) => {
@@ -204,7 +178,6 @@ const accountSlice = createSlice({
       state.isLoading = "error";
       state.errors = action.error.message;
       // state.data = null;
-      // state.message = action.payload.message;
     });
     // remove POST
     builder.addCase(fetchRemove.pending, (state) => {
@@ -222,7 +195,6 @@ const accountSlice = createSlice({
       state.isLoading = "error";
       state.errors = action.error.message;
       // state.data = null;
-      // state.message = action.payload.message;
     });
   },
 });

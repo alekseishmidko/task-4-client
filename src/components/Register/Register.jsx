@@ -58,6 +58,8 @@ const Register = () => {
             <Input
               className="w-full p-2 border rounded"
               placeholder="Enter your password"
+              type="password"
+              allowClear
             />
           </Form.Item>
 

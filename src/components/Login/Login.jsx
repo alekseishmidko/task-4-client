@@ -48,13 +48,14 @@ const Login = () => {
             className="w-full p-2 border rounded"
             type="password"
             placeholder="Enter your password"
+            allowClear
           />
         </Form.Item>
 
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 4 }}>
           <h4 className="mb-2">
             Haven't Acc?
-            <Link to={"/register"} className="ml-1 text-blue-500">
+            <Link to={"/register"} className="ml-3 text-blue-500">
               Create account
             </Link>
           </h4>

@@ -1,3 +1,5 @@
+import { Tag } from "antd";
+
 export const columns = [
   {
     title: "ID",
@@ -13,23 +15,25 @@ export const columns = [
   },
   {
     title: "Date of registration",
-    dataIndex: "createdAt",
+    dataIndex: "dateOfCreate",
     sorter: {
-      compare: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+      compare: (a, b) => new Date(a.dateOfCreate) - new Date(b.dateOfCreate),
       multiple: 1,
     },
   },
   {
     title: "Date of last login",
-    dataIndex: "updatedAt",
+    dataIndex: "dateOfLastLogin",
     sorter: {
-      compare: (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt),
+      compare: (a, b) =>
+        new Date(a.dateOfLastLogin) - new Date(b.dateOfLastLogin),
       multiple: 1,
     },
   },
   {
     title: "Status",
     dataIndex: "status",
+
     filters: [
       {
         text: "active",
